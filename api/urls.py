@@ -2,9 +2,9 @@ from django.conf.urls.defaults import *
 from piston.resource import Resource
 from django.http import HttpResponse
 from piston.handler import AnonymousBaseHandler, BaseHandler
-from app.api.gossip_handler import GossipHandler
-from app.api.photo_handler import PhotoHandler
-from app.api.destination_handler import DestinationHandler
+from api.gossip_handler import GossipHandler
+from api.photo_handler import PhotoHandler
+from api.destination_handler import DestinationHandler
 
 gossip_handler = Resource(GossipHandler)
 photo_handler = Resource(PhotoHandler)
