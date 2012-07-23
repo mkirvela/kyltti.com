@@ -7,6 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     (r'^api/', include('api.urls')),
+    url(r'^$', 'kyltti.webfront.views.home', name='home'),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # url(r'^$', 'kyltti.views.home', name='home'),
     # url(r'^kyltti/', include('kyltti.foo.urls')),
 
