@@ -1,0 +1,245 @@
+/*reset css*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html {
+    height: 100%;
+}
+
+body {
+	line-height: 1;
+}
+a {
+    color: #0088CC;
+}
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*---------*/
+
+/*background*/
+
+body {
+	background: url(images/kartta.jpg) 50% 0%;
+/*
+-webkit-box-shadow: inset 0px 0px 200px rgba(0,0,0,0.4);
+        -moz-box-shadow:    inset 0px 0px 200px rgba(0,0,0,0.4);
+        box-shadow:         inset 0px 0px 200px rgba(0,0,0,0.4);
+*/
+}
+
+/*header*/
+
+#header {
+	width: 980px;
+	margin: 0 auto;
+}
+#header ul {
+	background: url(images/halo.png) 50% 0% no-repeat;
+	height: 180px;
+}
+
+#header ul li {
+	display: inline;
+	float: left;
+	width: 15%;
+	padding-top: 70px;
+}
+
+#header ul li a {
+	display: block;
+	padding-top: 65px;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-family: 'Special Elite';
+	font-size: 18px;
+	letter-spacing: 1px;
+	color: white;
+	text-shadow: 0 0 2px #333333;
+}
+
+#header ul li a:hover span {
+	padding: 5px 3px 0px 3px;
+	background: #b3b3b3;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#header ul li.photos a {
+	background: url(images/photos.png) 50% 0% no-repeat;
+}
+
+#header ul li.comments a {
+	background: url(images/comments.png) 50% 0% no-repeat;
+}
+
+#header ul li.destinations a {
+	background: url(images/destinations.png) 50% 0% no-repeat;
+}
+
+#header ul li.story a {
+	background: url(images/story.png) 50% 0% no-repeat;
+}
+
+#header ul li.logo {
+	width: 40%;
+}
+
+#header ul li.logo a {
+	padding: 0;
+	margin-top: -50px;
+}
+
+#header ul li.active a {
+    text-decoration: underline;
+}
+
+/*content*/
+
+#content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+	margin: 10 auto 5 auto;
+	padding: 70px 10px 10px 10px;
+	background: f5a42c;
+	border: 5px solid transparent;
+	border-image: url(images/border.png) 5 5 5 5 repeat;
+	-moz-border-image: url(images/border.png) 5 5 5 5 repeat;
+	-webkit-border-image: url(images/border.png) 5 5 5 5 repeat;
+}
+
+hr {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 8px auto;
+    width: 100%;
+    clear: both;
+    border: none;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid black;
+    font-size: 1px;
+    line-height: 0;
+    overflow: visible;
+}
+
+p, .news {
+	font-family: 'Droid Serif', serif;
+	font-size: 13px;
+	line-height: 1.5;
+	padding-bottom: 5px;
+    margin-top: 3px;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Special Elite';
+	letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+/*vignette*/
+
+.vignette {
+        box-shadow:         inset 0px 0px 85px rgba(0,0,0,0.4);
+        -webkit-box-shadow: inset 0px 0px 85px rgba(0,0,0,0.4);
+        -moz-box-shadow:    inset 0px 0px 85px rgba(0,0,0,0.4);
+
+        line-height: 0;         /* ensure no space between bottom */
+
+        display: inline-block;  /* don't go wider than image */
+}
+
+.vignette img {
+        position: relative;
+        z-index: -1;            /* position beneath */
+}
+
+ul.filmstrip {
+    width: 450px; /*width of all of your images plus the margins/padding you use*/
+    height:140px;
+}
+
+ul.filmstrip li {
+    float: left;
+    display: block;
+    padding: 7px;
+    margin: 0px;
+}
+
+ul.filmstrip li img {
+    border: 0px;
+    height: 100px; /* just incase the images are a different size */
+    width: 140px; /* ditto */
+    margin: 0px;
+    padding:0px;
+}
+
+/*footer*/
+
+#footer {
+	margin: 20 auto 0 auto;
+	text-align: center;
+    padding: 7px;
+    height: 100%;
+}
+
+/*small screen*/
+
+@media screen and (max-width: 980px) {
+
+	#header {
+		width: 800px;
+	}
+
+	#header ul li.photos a, #header ul li.comments a, #header ul li.destinations a, #header ul li.story a {
+		background: none;
+	}
+
+}

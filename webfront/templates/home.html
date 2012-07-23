@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="fb-like" data-send="true" data-width="450" data-show-faces="true" data-font="trebuchet ms"></div>
+
+<!-- templates -->
+<div id="main">
+</div>
+
+
+<script type="text/html" id="story">
+<h1>Kyltti.com story</h1>
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+</script>
+
+<script type="text/html" id="photo-view">
+
+</script>
+
+<script type="text/html" id="destination-list">
+<h1>Epic destinations:</h1>
+</script>
+
+<script type="text/html" id="destination-template">
+    <a href="/#photos/${slug}">${name}</a>
+</script>
+
+<script type="text/html" id="photo-list">
+<h1>Epic pics from crappy places:</h1>
+</script>
+
+<script type="text/html" id="photo-template">
+<a id="${id}" class="photos" rel="${destination.slug}" title="${caption}" href="/site_media/photos/medium/${fn}">
+    <img src="/site_media/photos/thumbs/p${fn}" alt="${fn}" />
+    </a>
+<div>
+    ${caption}
+</div>
+</script>
+
+<script type="text/html" id="gossip-list">
+<h1>Kyltti.com uutisia:</h1>
+</script>
+
+<script type="text/html" id="gossip-template">
+<div class="news">
+    <h4>${date} :: ${title} </h4>
+    ${body}
+    <hr />
+</div>
+</script>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+// destination model
+Destination = Backbone.Model.extend({
+    urlRoot: "http://127.0.0.1:8888/api/destinations/",
+    //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
+});
+
+// the collection of destination models
+Destinations = Backbone.Collection.extend({
+    model: Destination,
+    url: "http://127.0.0.1:8888/api/destinations/",
+});
+
+// photo model
+Photo = Backbone.Model.extend({
+    urlRoot: "http://127.0.0.1:8888/api/photos/:slug/:id/",
+    //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
+});
+
+// the collection of user models
+Photos = Backbone.Collection.extend({
+    model: Photo,
+    url: "http://127.0.0.1:8888/api/photos/",
+});
+
+// user model
+Gossip = Backbone.Model.extend({
+    urlRoot: "http://127.0.0.1:8888/api/news/",
+    //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
+});
+
+// the collection of user models
+Gossips = Backbone.Collection.extend({
+    model: Gossip,
+    url: "http://127.0.0.1:8888/api/news/",
+});
+
+// global reference to the collection
+gossips = new Gossips();
+photos = new Photos();
+destinations = new Destinations();
+converter = new Markdown.Converter().makeHtml;
+
+DestinationListView = Backbone.View.extend({
+    initialize : function(){
+        this.template = $("#destination-list");
+        _.bindAll(this,"render");
+        //rerender whenever there's a change to the collection
+        this.collection.bind("add", this.render);
+        this.collection.bind("remove", this.render);
+    },
+    render : function() {
+        var content = this.template.tmpl();
+        $(this.el).html(content);
+        var els = [];
+        //loop the collection..
+        console.log("DestinationListView render.");
+        this.collection.each(function(model){
+            //rendering a view for each model in the collection
+            var view = new DestinationItemView({model : model});
+            //adding it to our array
+            els.push(view.render().el);
+        });
+        //push that array into this View's "el"
+        $(this.el).append(els);
+        $(this.el).prepend(content);
+        return this;
+    }
+});
+
+DestinationItemView = Backbone.View.extend({
+    //tagName: "li", 
+    initialize: function() {
+        this.template = $("#destination-template");
+        _.bindAll(this, "render", "remove");
+        //this.model.bind("change", this.render);
+     },
+
+    render: function(eventName) {
+        var content = this.template.tmpl(this.model.toJSON());
+        $(this.el).html(content);
+        return this;
+    },
+});
+
+PhotoListView = Backbone.View.extend({
+    initialize : function(){
+        this.template = $("#photo-list");
+        _.bindAll(this,"render");
+        //rerender whenever there's a change to the collection
+        this.collection.bind("add", this.render);
+        this.collection.bind("remove", this.render);
+    },
+    render : function() {
+        var content = this.template.tmpl();
+        $(this.el).html(content);
+        var els = [];
+        //loop the collection..
+        console.log("PhotoListView render.");
+        this.collection.each(function(model){
+            //rendering a view for each model in the collection
+            var view = new PhotoItemView({model : model});
+            //adding it to our array
+            els.push(view.render().el);
+        });
+        //push that array into this View's "el"
+        $(this.el).append(els);
+        $(this.el).prepend(content);
+        console.log("doing it only once.");
+        $(this.el).find("a.photos").fancybox({
+            prevEffect  : 'none',
+            nextEffect  : 'none',
+            overlayOpacity: 0.4,
+            helpers : {
+                title   : {
+                    type: 'over',
+                },
+                overlay : {
+                    opacity : 0.8,
+                    css : {
+                        'background-color' : '#000'
+                    }
+                },
+                thumbs  : {
+                    width   : 50,
+                    height  : 50
+                }
+            }
+        });
+         return this;
+    }
+});
+
+PhotoItemView = Backbone.View.extend({
+    //tagName: "li", 
+    initialize: function() {
+        this.template = $("#photo-template");
+        _.bindAll(this, "render", "remove");
+        //this.model.bind("change", this.render);
+     },
+
+    render: function(eventName) {
+        var content = this.template.tmpl(this.model.toJSON());
+        $(this.el).html(content);
+       return this;
+    },
+});
+
+StoryView = Backbone.View.extend({
+    initialize : function(){
+        this.template = $("#story");
+    },
+    render : function() {
+        var content = this.template.tmpl();
+        $(this.el).html(content);
+        return this;
+    }
+});
+
+GossipListView = Backbone.View.extend({
+    initialize : function(){
+        this.template = $("#gossip-list");
+        _.bindAll(this,"render");
+        //rerender whenever there's a change to the collection
+        this.collection.bind("add", this.render);
+        this.collection.bind("remove", this.render);
+    },
+    render : function() {
+        var content = this.template.tmpl();
+        $(this.el).html(content);
+        var els = [];
+        //loop the collection..
+        console.log("GossipListView render.");
+        this.collection.each(function(model){
+            //rendering a view for each model in the collection
+            var view = new GossipItemView({model : model});
+            //adding it to our array
+            els.push(view.render().el);
+        });
+        //push that array into this View's "el"
+        $(this.el).append(els);
+        $(this.el).prepend(content);
+        return this;
+    }
+});
+
+GossipItemView = Backbone.View.extend({
+    //tagName: "li", 
+    initialize: function() {
+        this.template = $("#gossip-template");
+        _.bindAll(this, "render", "remove");
+        //this.model.bind("change", this.render);
+     },
+
+    render: function(eventName) {
+        console.log(converter(this.model.get("body")));
+        var markdown_body = converter(this.model.get("body"));
+        this.model.set( { body: markdown_body } );
+        var content = this.template.tmpl(this.model.toJSON());
+        $(this.el).html(content);
+        return this;
+    },
+});
+
+Home = Backbone.Router.extend({
+    routes: {
+        "": "index",
+        "photos/:slug":     "getPhotos",
+        "photos/:slug/:id": "showPhoto",
+        "photos":           "photos",
+        "comments":         "comments",
+        "destinations":     "destinations",
+        "story":            "story",
+    },
+    showPhoto: function(slug, id) {
+        console.log("oh my god");
+    },
+
+    getPhotos: function(slug) {
+        console.log("#getPhotosBySlug");
+        $("#header li").removeClass("active");
+        $("#header li.photos").addClass("active");
+        var photos_by_slugs = new Photos();
+        $.getJSON('/api/photos/' + slug + '/', function(data) {
+            if(data) {
+                photos_by_slugs.add(data);
+                photoView = new PhotoListView({ collection: photos_by_slugs, el: '#main' });
+                photoView.render();
+        }});                       /*        
+        photos.fetch({ success: function() {
+            console.log("photo_by_slug init");
+            photoView = new PhotoListView({ collection: photos, el: '#main' });
+            photoView.render();
+        }});*/
+    },
+    photos: function() {
+        console.log("#photos");
+        $("#header li").removeClass("active");
+        $("#header li.photos").addClass("active");
+        photos.fetch({ success: function() {
+            console.log("photo init");
+            photoView = new PhotoListView({ collection: photos, el: '#main' });
+            photoView.render();
+        }});
+    },
+    index: function() {
+        console.log("#index");
+        $("#header li").removeClass("active");
+        $("title").html("Kyltti.com uutisia");
+        gossips.fetch({success: function(){
+            console.log(gossips); 
+            gossipView = new GossipListView({ collection: gossips, el: '#main' });
+            gossipView.render();
+        }});
+
+   },
+    comments: function() {
+        console.log("#comments");
+        $("#header li").removeClass("active");
+        $("#header li.comments").addClass("active");
+    },
+    story: function() {
+        console.log("#story");
+        $("#header li").removeClass("active");
+        $("#header li.story").addClass("active");
+        storyView = new StoryView({ el: '#main' });
+        storyView.render();
+    },
+    destinations: function() {
+        console.log("#destinations");
+        $("#header li").removeClass("active");
+        $("#header li.destinations").addClass("active");
+        destinations.fetch({ success: function() {
+            console.log("destination init");
+            destinationView = new DestinationListView({ collection: destinations, el: '#main' });
+            destinationView.render();
+        }});    
+    }
+});
+
+$(function(){
+    var app = new Home();
+    Backbone.history.start();
+});
+
+</script>
+{% endblock %}
