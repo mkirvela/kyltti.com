@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="fb-like" data-send="true" data-width="450" data-show-faces="true" data-font="trebuchet ms"></div>
 
 <!-- templates -->
 <div id="main">
@@ -57,38 +56,38 @@
 
 // destination model
 Destination = Backbone.Model.extend({
-    urlRoot: "http://127.0.0.1:8888/api/destinations/",
+    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/destinations/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of destination models
 Destinations = Backbone.Collection.extend({
     model: Destination,
-    url: "http://127.0.0.1:8888/api/destinations/",
+    url: "http://evening-mountain-4003.herokuapp.com/api/destinations/",
 });
 
 // photo model
 Photo = Backbone.Model.extend({
-    urlRoot: "http://127.0.0.1:8888/api/photos/:slug/:id/",
+    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/photos/:slug/:id/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of user models
 Photos = Backbone.Collection.extend({
     model: Photo,
-    url: "http://127.0.0.1:8888/api/photos/",
+    url: "http://evening-mountain-4003.herokuapp.com/api/photos/",
 });
 
 // user model
 Gossip = Backbone.Model.extend({
-    urlRoot: "http://127.0.0.1:8888/api/news/",
+    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/news/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of user models
 Gossips = Backbone.Collection.extend({
     model: Gossip,
-    url: "http://127.0.0.1:8888/api/news/",
+    url: "http://evening-mountain-4003.herokuapp.com/api/news/",
 });
 
 // global reference to the collection
