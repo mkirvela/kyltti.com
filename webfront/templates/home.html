@@ -21,7 +21,7 @@
 </script>
 
 <script type="text/html" id="destination-template">
-    <a href="/#photos/${slug}">${name}</a>
+    <a href="/#photos/<%= slug %>"><%= name %></a>
 </script>
 
 <script type="text/html" id="photo-list">
@@ -29,11 +29,11 @@
 </script>
 
 <script type="text/html" id="photo-template">
-<a id="${id}" class="photos" rel="${destination.slug}" title="${caption}" href="/site_media/photos/medium/${fn}">
-    <img src="/site_media/photos/thumbs/p${fn}" alt="${fn}" />
+<a id="<%= id %>" class="photos" rel="<%= destination.slug %>" title="<%= caption %>" href="/site_media/photos/medium/<%= fn %>">
+    <img src="/site_media/photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
     </a>
 <div>
-    ${caption}
+    <%= caption %>
 </div>
 </script>
 
@@ -43,8 +43,8 @@
 
 <script type="text/html" id="gossip-template">
 <div class="news">
-    <h4>${date} :: ${title} </h4>
-    {{html body}}
+    <h4><%= date %> :: <%= title %> </h4>
+    <%= body %>
     <hr />
 </div>
 </script>
@@ -94,19 +94,17 @@ Gossips = Backbone.Collection.extend({
 gossips = new Gossips();
 photos = new Photos();
 destinations = new Destinations();
-converter = new Markdown.Converter().makeHtml;
 
 DestinationListView = Backbone.View.extend({
+    template: _.template($("#destination-list").html()),
     initialize : function(){
-        this.template = $("#destination-list");
         _.bindAll(this,"render");
         //rerender whenever there's a change to the collection
         this.collection.bind("add", this.render);
         this.collection.bind("remove", this.render);
     },
     render : function() {
-        var content = this.template.tmpl();
-        $(this.el).html(content);
+        $(this.el).html(this.template);
         var els = [];
         //loop the collection..
         console.log("DestinationListView render.");
@@ -118,37 +116,33 @@ DestinationListView = Backbone.View.extend({
         });
         //push that array into this View's "el"
         $(this.el).append(els);
-        $(this.el).prepend(content);
         return this;
     }
 });
 
 DestinationItemView = Backbone.View.extend({
     //tagName: "li", 
+    template: _.template($("#destination-template").html()),
     initialize: function() {
-        this.template = $("#destination-template");
         _.bindAll(this, "render", "remove");
         //this.model.bind("change", this.render);
      },
 
     render: function(eventName) {
-        var content = this.template.tmpl(this.model.toJSON());
-        $(this.el).html(content);
+        $(this.el).html(this.template(this.model.toJSON()));
         return this;
     },
 });
 
 PhotoListView = Backbone.View.extend({
+    template: _.template($("#photo-list").html()),
     initialize : function(){
-        this.template = $("#photo-list");
         _.bindAll(this,"render");
         //rerender whenever there's a change to the collection
         this.collection.bind("add", this.render);
         this.collection.bind("remove", this.render);
     },
     render : function() {
-        var content = this.template.tmpl();
-        $(this.el).html(content);
         var els = [];
         //loop the collection..
         console.log("PhotoListView render.");
@@ -160,7 +154,7 @@ PhotoListView = Backbone.View.extend({
         });
         //push that array into this View's "el"
         $(this.el).append(els);
-        $(this.el).prepend(content);
+        $(this.el).prepend(this.template);
         console.log("doing it only once.");
         $(this.el).find("a.photos").fancybox({
             prevEffect  : 'none',
@@ -187,17 +181,16 @@ PhotoListView = Backbone.View.extend({
 });
 
 PhotoItemView = Backbone.View.extend({
+    template: _.template($("#photo-template").html()),
     //tagName: "li", 
     initialize: function() {
-        this.template = $("#photo-template");
         _.bindAll(this, "render", "remove");
         //this.model.bind("change", this.render);
      },
 
     render: function(eventName) {
-        var content = this.template.tmpl(this.model.toJSON());
-        $(this.el).html(content);
-       return this;
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
     },
 });
 
@@ -213,16 +206,17 @@ StoryView = Backbone.View.extend({
 });
 
 GossipListView = Backbone.View.extend({
+    template: _.template($("#gossip-list").html()),
     initialize : function(){
-        this.template = $("#gossip-list");
+        //this.template = $("#gossip-list");
         _.bindAll(this,"render");
         //rerender whenever there's a change to the collection
         this.collection.bind("add", this.render);
         this.collection.bind("remove", this.render);
     },
     render : function() {
-        var content = this.template.tmpl();
-        $(this.el).html(content);
+        //var content = this.template.tmpl();
+        $(this.el).html(this.template);
         var els = [];
         //loop the collection..
         console.log("GossipListView render.");
@@ -234,25 +228,23 @@ GossipListView = Backbone.View.extend({
         });
         //push that array into this View's "el"
         $(this.el).append(els);
-        $(this.el).prepend(content);
         return this;
     }
 });
 
 GossipItemView = Backbone.View.extend({
+    template: _.template($("#gossip-template").html()),
     //tagName: "li", 
     initialize: function() {
-        this.template = $("#gossip-template");
         _.bindAll(this, "render", "remove");
         //this.model.bind("change", this.render);
      },
 
     render: function(eventName) {
-        console.log("test:" + wiky.process(this.model.get("body")));
-        var markdown_body = wiky.process(this.model.get("body"));
+        console.log("test:" + ParseWiki(this.model.get("body")));
+        var markdown_body = ParseWiki(this.model.get("body"));
         this.model.set( { body: markdown_body } );
-        var content = this.template.tmpl(this.model.toJSON());
-        $(this.el).html(content);
+        $(this.el).html(this.template(this.model.toJSON()));
         return this;
     },
 });
