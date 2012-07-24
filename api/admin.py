@@ -7,5 +7,5 @@ class DestinationAdmin(admin.ModelAdmin):
 
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Photo)
-admin.site.register(Gossip, MarkdownModelAdmin)
+admin.site.register(Gossip, ModelAdmin)
 
