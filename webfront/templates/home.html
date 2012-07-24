@@ -56,38 +56,38 @@
 
 // destination model
 Destination = Backbone.Model.extend({
-    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/destinations/",
+    urlRoot: "/api/destinations/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of destination models
 Destinations = Backbone.Collection.extend({
     model: Destination,
-    url: "http://evening-mountain-4003.herokuapp.com/api/destinations/",
+    url: "/api/destinations/",
 });
 
 // photo model
 Photo = Backbone.Model.extend({
-    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/photos/:slug/:id/",
+    urlRoot: "/api/photos/:slug/:id/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of user models
 Photos = Backbone.Collection.extend({
     model: Photo,
-    url: "http://evening-mountain-4003.herokuapp.com/api/photos/",
+    url: "/api/photos/",
 });
 
 // user model
 Gossip = Backbone.Model.extend({
-    urlRoot: "http://evening-mountain-4003.herokuapp.com/api/news/",
+    urlRoot: "/api/news/",
     //urlRoot: "http://127.0.0.1:8000/api/events/{{ hash }}/users",
 });
 
 // the collection of user models
 Gossips = Backbone.Collection.extend({
     model: Gossip,
-    url: "http://evening-mountain-4003.herokuapp.com/api/news/",
+    url: "/api/news/",
 });
 
 // global reference to the collection
@@ -249,7 +249,7 @@ GossipItemView = Backbone.View.extend({
 
     render: function(eventName) {
         console.log(converter(this.model.get("body")));
-        var markdown_body = converter(this.model.get("body"));
+        var markdown_body = wiky.process(this.model.get("body"));
         this.model.set( { body: markdown_body } );
         var content = this.template.tmpl(this.model.toJSON());
         $(this.el).html(content);
