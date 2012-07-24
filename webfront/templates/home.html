@@ -248,7 +248,7 @@ GossipItemView = Backbone.View.extend({
      },
 
     render: function(eventName) {
-        console.log(converter(this.model.get("body")));
+        console.log("test:" + wiky.process(this.model.get("body")));
         var markdown_body = wiky.process(this.model.get("body"));
         this.model.set( { body: markdown_body } );
         var content = this.template.tmpl(this.model.toJSON());
