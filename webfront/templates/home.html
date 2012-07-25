@@ -143,6 +143,7 @@ PhotoListView = Backbone.View.extend({
         this.collection.bind("remove", this.render);
     },
     render : function() {
+        $(this.el).html(this.template);
         var els = [];
         //loop the collection..
         console.log("PhotoListView render.");
@@ -154,7 +155,6 @@ PhotoListView = Backbone.View.extend({
         });
         //push that array into this View's "el"
         $(this.el).append(els);
-        $(this.el).prepend(this.template);
         console.log("doing it only once.");
         $(this.el).find("a.photos").fancybox({
             prevEffect  : 'none',

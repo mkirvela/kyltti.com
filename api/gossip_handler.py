@@ -8,12 +8,10 @@ class GossipHandler(BaseHandler):
     
     allowed_methods = ('GET')
     model = Gossip
-    # is this necessary? the id is needed in order to get dues
     exclude = ()
 
     def read(self, request):
         """
         Get latest gossips
         """
-        gossips = Gossip.objects
-        return gossips.all()
+        return Gossip.objects.all()

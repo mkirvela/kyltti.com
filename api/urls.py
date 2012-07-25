@@ -11,9 +11,10 @@ photo_handler = Resource(PhotoHandler)
 destination_handler = Resource(DestinationHandler)
 
 urlpatterns = patterns('',
-   url(r'^news/$', gossip_handler),
-   url(r'^destinations/$', destination_handler),
-   url(r'^photos/$', photo_handler),
-   url(r'^photos/(?P<slug>[^/]+)/$', photo_handler),
-   url(r'^photos/(?P<slug>[^/]+)/(?P<photo>\d+)/$', photo_handler),
+    url(r'^$', 'api.views.home', name='home'),
+    url(r'^news/$', gossip_handler),
+    url(r'^destinations/$', destination_handler),
+    url(r'^photos/$', photo_handler),
+    url(r'^photos/(?P<slug>[^/]+)/$', photo_handler),
+    url(r'^photos/(?P<slug>[^/]+)/(?P<photo>\d+)/$', photo_handler),
 )
