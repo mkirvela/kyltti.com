@@ -14,4 +14,4 @@ class GossipHandler(BaseHandler):
         """
         Get latest gossips
         """
-        return Gossip.objects.all()
+        return Gossip.objects.order_by('-date')
