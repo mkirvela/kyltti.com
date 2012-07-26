@@ -63,7 +63,7 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -158,6 +158,13 @@ LOGGING = {
     }
 }
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
+AWS_ACCESS_KEY_ID = 'AKIAJ62QW2AMWR2A3RDA'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'kyltti'
+STATIC_URL = '//%s.s3-website-eu-west-1.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 # at the END of settings.py:
 import os
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')  # dev, production, qa, etc
