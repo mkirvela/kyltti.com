@@ -1,9 +1,11 @@
 Django==1.4
 Markdown==2.2.0
+boto==2.5.2
 distribute==0.6.27
 dj-database-url==0.2.1
 django-markdown==0.1.0
 django-piston==0.2.3
+django-storages==1.1.5
+gunicorn==0.14.2
 psycopg2==2.4.5
 wsgiref==0.1.2
-gunicorn==0.14.2
