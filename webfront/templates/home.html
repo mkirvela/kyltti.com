@@ -29,8 +29,8 @@
 </script>
 
 <script type="text/html" id="photo-template">
-<a id="<%= id %>" class="photos" rel="<%= destination.slug %>" title="<%= caption %>" href="/site_media/photos/medium/<%= fn %>">
-    <img src="/site_media/photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
+<a id="<%= id %>" class="photos" rel="<%= destination.slug %>" title="<%= caption %>" href="{{ MEDIA_URL }}photos/medium/<%= fn %>">
+    <img src="{{ MEDIA_URL }}photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
     </a>
 <div>
     <%= caption %>
