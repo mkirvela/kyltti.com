@@ -53,7 +53,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-#MEDIA_URL = ''
+MEDIA_URL = ''
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -165,7 +165,6 @@ AWS_SECRET_ACCESS_KEY = 'nirX3ClIJeuE4A68Ww7wglFIXsPrwQ9t/m/ULRHp'
 AWS_STORAGE_BUCKET_NAME = 'kyltti'
 STATIC_URL = '//%s.s3-website-eu-west-1.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-MEDIA_URL = 'http:' + STATIC_URL
 # at the END of settings.py:
 import os
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')  # dev, production, qa, etc
