@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="icon" href="{{ MEDIA_URL }}css/images/kyltti_favicon.png" type="image/png" />
-        <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" />
-        <link rel="stylesheet" href="{{ MEDIA_URL }}fancybox/jquery.fancybox.css?v=2.0.5" type="text/css" media="screen" />
+        <link rel='icon' href='{{ MEDIA_URL }}css/images/kyltti_favicon.png' type='image/png' />
+        <link rel='stylesheet' href='{{ MEDIA_URL }}css/style.css' />
+        <link rel='stylesheet' href='{{ MEDIA_URL }}fancybox/jquery.fancybox.css?v=2.0.5' type='text/css' media='screen' />
         <link href='http://fonts.googleapis.com/css?family=Special+Elite|Droid+Serif:400,400italic,700' rel='stylesheet' type='text/css'>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-        <script src="{{ MEDIA_URL }}js/ParseWiki.js"></script>
-        <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
-        <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>   
-        <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
-        <script src ="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" ></script>
-        <script src="{{ MEDIA_URL }}fancybox/jquery.fancybox.pack.js"></script>
-        <link rel="stylesheet" href="{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.css?v=2.0.5" type="text/css" media="screen" />
-        <script type="text/javascript" src="{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.js?v=2.0.5"></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js'></script>
+        <script src='{{ MEDIA_URL }}js/ParseWiki.js'></script>
+        <script src='http://documentcloud.github.com/underscore/underscore-min.js'></script>
+        <script src='http://documentcloud.github.com/backbone/backbone-min.js'></script>   
+        <script src='http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js'></script>
+        <script src ='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' ></script>
+        <script src='{{ MEDIA_URL }}fancybox/jquery.fancybox.pack.js'></script>
+        <link rel='stylesheet' href='{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.css?v=2.0.5' type='text/css' media='screen' />
+        <script type='text/javascript' src='{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.js?v=2.0.5'></script>
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
@@ -24,19 +24,19 @@
     <div id='header'>
         <ul>
             <li class='photos'>
-                <a href="#photos"><span>Kuvat</span></a>
+                <a href='#photos'><span>Kuvat</span></a>
             </li>
             <li class='comments'>
-                <a href="#comments"><span>Kommentit</span></a>
+                <a href='#comments'><span>Kommentit</span></a>
             </li>
             <li class='logo'>
-                <a href="#"><img alt="kyltti.com - ei talvikunnossapitoa" src="{{ MEDIA_URL }}css/images/logo.png"/></a>
+                <a href='#'><img alt='kyltti.com - ei talvikunnossapitoa' src='{{ MEDIA_URL }}css/images/logo.png'/></a>
             </li>
             <li class='destinations'>
-                <a href="#destinations"><span>Maat</span></a>
+                <a href='#destinations'><span>Maat</span></a>
             </li>
             <li class='story'>
-                <a href="#story"><span>Tarina</span></a>
+                <a href='#story'><span>Tarina</span></a>
             </li>
         </ul>
     </div>
@@ -45,8 +45,16 @@
         {% block content %}{% endblock %}
     </div>
 
-    <div id="footer">
-        ©footer
+    <div id='footer' style='overflow: auto;'>
+        <div class='slogan' style='float: left;'>
+            <span style='font-size: 18px; font-weight: bold;'>Reissut on..</span><br />
+            <span style='font-size: 28px; font-family: Impact, Charcoal, sans-serif;'>&nbsp;-&nbsp;kyltti.com&nbsp;-&nbsp;</span><br />
+            <span style='font-size: 16px'>..tehty tarinoista</span>
+        </div>
+        <div style='float: left; width: 2px; background-color: white; height: 100%;'>&nbsp;</div>
+        <div style='float: left; height: 100%;'>
+            testing testing one two three
+        </div>
     </div>
 
     {% block js %}{% endblock %}

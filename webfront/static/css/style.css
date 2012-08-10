@@ -141,7 +141,7 @@ body {
     width: 800px;
 	margin: 10 auto 5 auto;
 	padding: 70px 10px 10px 10px;
-	background: f5a42c;
+	background: #f5a42c;
 	border: 5px solid transparent;
 	border-image: url(images/border.png) 5 5 5 5 repeat;
 	-moz-border-image: url(images/border.png) 5 5 5 5 repeat;
@@ -224,10 +224,22 @@ ul.filmstrip li img {
 /*footer*/
 
 #footer {
-	margin: 20 auto 0 auto;
-	text-align: center;
-    padding: 7px;
-    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    margin-top: 15px;
+    padding: 10px;
+    border: 5px solid transparent;
+    /*border-image: url(images/border.png) 5 5 5 5 repeat;
+    -moz-border-image: url(images/border.png) 5 5 5 5 repeat;
+    -webkit-border-image: url(images/border.png) 5 5 5 5 repeat;
+    */color: #DDD3BF;
+    font-family: Impact, Charcoal, sans-serif;
+}
+
+#footer .slogan {
+    color: #DDD3BF;
+    font-family: Century Gothic, sans-serif;
 }
 
 /*small screen*/
