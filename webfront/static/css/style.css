@@ -54,100 +54,161 @@ table {
 
 /*---------*/
 
+
 /*background*/
 
 body {
-	background: url(images/bg_map.jpg) 50% 0%;
-/*
--webkit-box-shadow: inset 0px 0px 200px rgba(0,0,0,0.4);
-        -moz-box-shadow:    inset 0px 0px 200px rgba(0,0,0,0.4);
-        box-shadow:         inset 0px 0px 200px rgba(0,0,0,0.4);
-*/
+	background: url(images/map.jpg) 50% 0%;
+	font: 62.5%/1.4 'Droid Serif', serif;
+	height: 100%;
+}
+
+#container {
+	background: rgba(255, 255, 255, 0.4);
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+	padding: 2em 1em;
+	min-height: 100%;
+}
+
+/*fonts*/
+
+body {
+	font: 62.5%/1.4 'Droid Serif', serif;
+}
+
+a:link {
+	text-decoration:none;
+	color:#2f768e;
+}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:underline;}
+a:active {text-decoration:underline;}
+
+h1, h2, h3, h4 {
+	font-family: 'Special Elite';
+#	letter-spacing: 0.01em;
 }
 
 /*header*/
 
-#header {
-	width: 980px;
-	margin: 0 auto;
-}
-#header ul {
-	background: url(images/halo.png) 50% 0% no-repeat;
-	height: 180px;
+#logo {
+	float: left;
+	position:relative;
+	margin: 0 0 -3em 0;
 }
 
-#header ul li {
-	display: inline;
+#header {
+	margin: 0 0 2em 0;
+	float: right;
+}
+
+#header ul {
 	float: left;
-	width: 15%;
-	padding-top: 70px;
+	margin-top: 60px;
+}
+
+
+#header ul li {
+	font-size: 1.8em;
+	letter-spacing: 0.2em;
+	float: left;
 }
 
 #header ul li a {
 	display: block;
-	padding-top: 65px;
-	text-align: center;
-	text-transform: uppercase;
+	padding: 0.5em 0.8em 0 0.8em;
 	text-decoration: none;
+	color: #423018;
 	font-family: 'Special Elite';
-	font-size: 18px;
-	letter-spacing: 1px;
-	color: white;
-	text-shadow: 0 0 2px #333333;
 }
 
-#header ul li a:hover span {
-	padding: 5px 3px 0px 3px;
-	background: #b3b3b3;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-}
-
-#header ul li.photos a {
-	background: url(images/photos.png) 50% 0% no-repeat;
-}
-
-#header ul li.comments a {
-	background: url(images/comments.png) 50% 0% no-repeat;
-}
-
-#header ul li.destinations a {
-	background: url(images/destinations.png) 50% 0% no-repeat;
-}
-
-#header ul li.story a {
-	background: url(images/story.png) 50% 0% no-repeat;
+#header a:hover {
+	color: #3d4d1b;
+	text-shadow: 0 0 2px #c3f65a;
 }
 
 #header ul li.logo {
-	width: 40%;
-}
-
-#header ul li.logo a {
-	padding: 0;
-	margin-top: -50px;
+	display:none;
 }
 
 #header ul li.active a {
-    text-decoration: underline;
+    font-weight: bold;
+}
+
+/*Story*/
+
+ #story {
+	font-size: 1.5em;
+	padding:3em 0;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	float:left;
+	-webkit-column-count: 2;
+	-webkit-column-width: 50%;
+	-webkit-column-gap: 3em;
+	-webkit-column-rule: 1px solid #000;
+	-moz-column-count: 2;
+	-moz-column-width: 50%;
+	-moz-column-gap: 3em;
+	-moz-column-rule: 1px solid #000; 
+	column-count: 2;
+	column-width: 50%;
+	column-gap: 3em;
+	column-rule: 1px solid #000; 
 }
 
 /*content*/
 
 #content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-	margin: 10 auto 5 auto;
-	padding: 70px 10px 10px 10px;
-	background: #f5a42c;
-	border: 5px solid transparent;
-	border-image: url(images/border.png) 5 5 5 5 repeat;
-	-moz-border-image: url(images/border.png) 5 5 5 5 repeat;
-	-webkit-border-image: url(images/border.png) 5 5 5 5 repeat;
+	clear:both;
 }
 
+#main{
+	padding-top: 2em;
+	clear:both;
+}
+
+#header ul li.photos a {
+    padding-top: 60px;
+    background: url(images/photos.png) 50% 0% no-repeat;
+}
+
+#header ul li.comments a {
+    padding-top: 60px;
+    background: url(images/comments.png) 50% 0% no-repeat;
+}
+
+#header ul li.destinations a {
+    padding-top: 60px;
+    background: url(images/destinations.png) 50% 0% no-repeat;
+}
+
+#header ul li.story a {
+    padding-top: 60px;
+    background: url(images/story.png) 50% 0% no-repeat;
+}
+
+.photos {
+	float:left;
+	filter: grayscale(100%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'saturate\' values=\'0.3\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+	filter: gray alpha(opacity=30);; /* IE6-9 */
+	-webkit-filter: grayscale(30%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+.photos:hover {
+    filter: none;
+    -webkit-filter: grayscale(0%);
+}
+
+/*piilottaa kuvien tekstit*/
+#main div div {display:none}
+
+#main .news {display:block;}
+
+/* Mikähän tää on?*/
 hr {
     display: block;
     position: relative;
@@ -163,95 +224,41 @@ hr {
     overflow: visible;
 }
 
+
 p, .news {
-	font-family: 'Droid Serif', serif;
-	font-size: 15px;
-	line-height: 1.5;
-	padding-bottom: 5px;
-    margin-top: 3px;
+	display:block;
+	font-size: 1.3em;
+	line-height: 1.4;
+	padding: 1em 0;
+	border-bottom: 1px dotted #3d4d1b;
+	position:relative;
 }
 
-h1, h2, h3, h4 {
-	font-family: 'Special Elite';
-	letter-spacing: 1px;
+.news:hover span {display:inline;}
+.news span {
+	font-size: 0.7em;
+#	display:none;
+	float:right;
+	position:absolute;
+	bottom:0.2em;
 }
 
 h1 {
-    font-size: 22px;
+	font-size: 2em;
 }
 
 h4 {
-    font-size: 16px;
-}
-
-/*vignette*/
-
-.vignette {
-        box-shadow:         inset 0px 0px 85px rgba(0,0,0,0.4);
-        -webkit-box-shadow: inset 0px 0px 85px rgba(0,0,0,0.4);
-        -moz-box-shadow:    inset 0px 0px 85px rgba(0,0,0,0.4);
-
-        line-height: 0;         /* ensure no space between bottom */
-
-        display: inline-block;  /* don't go wider than image */
-}
-
-.vignette img {
-        position: relative;
-        z-index: -1;            /* position beneath */
-}
-
-ul.filmstrip {
-    width: 450px; /*width of all of your images plus the margins/padding you use*/
-    height:140px;
-}
-
-ul.filmstrip li {
-    float: left;
-    display: block;
-    padding: 7px;
-    margin: 0px;
-}
-
-ul.filmstrip li img {
-    border: 0px;
-    height: 100px; /* just incase the images are a different size */
-    width: 140px; /* ditto */
-    margin: 0px;
-    padding:0px;
+	font-size: 1.3em;
+	color: #3d4d1b;
 }
 
 /*footer*/
 
 #footer {
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
-    margin-top: 15px;
-    padding: 10px;
-    border: 5px solid transparent;
-    /*border-image: url(images/border.png) 5 5 5 5 repeat;
-    -moz-border-image: url(images/border.png) 5 5 5 5 repeat;
-    -webkit-border-image: url(images/border.png) 5 5 5 5 repeat;
-    */color: #DDD3BF;
-    font-family: Impact, Charcoal, sans-serif;
-}
-
-#footer .slogan {
-    color: #DDD3BF;
-    font-family: Century Gothic, sans-serif;
-}
-
-/*small screen*/
-
-@media screen and (max-width: 980px) {
-
-	#header {
-		width: 800px;
-	}
-
-	#header ul li.photos a, #header ul li.comments a, #header ul li.destinations a, #header ul li.story a {
-		background: none;
-	}
-
+	clear:both;
+	text-align: center;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top:30px;
 }
