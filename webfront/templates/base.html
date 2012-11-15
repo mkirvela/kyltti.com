@@ -12,6 +12,7 @@
         <script src='http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js'></script>
         <script src ='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' ></script>
         <script src='{{ MEDIA_URL }}fancybox/jquery.fancybox.pack.js'></script>
+        <script src='{{ MEDIA_URL }}js/jquery.masonry.min.js'></script>
         <link rel='stylesheet' href='{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.css?v=2.0.5' type='text/css' media='screen' />
         <script type='text/javascript' src='{{ MEDIA_URL }}fancybox/helpers/jquery.fancybox-thumbs.js?v=2.0.5'></script>
         {% block stylesheets %}{% endblock %}
@@ -27,8 +28,8 @@
             <li class='photos'>
                 <a href='#photos'><span>Kuvat</span></a>
             </li>
-            <li class='comments'>
-                <a href='#comments'><span>Kommentit</span></a>
+            <li class='gossips'>
+                <a href='#gossips'><span>Uutiset</span></a>
             </li>
             <li class='logo'>
                 <a href='#'><img alt='kyltti.com - ei talvikunnossapitoa' src='{{ MEDIA_URL }}css/images/logo.png'/></a>

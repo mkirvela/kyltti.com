@@ -9,7 +9,12 @@
 
 <script type="text/html" id="story_template">
 <h1>Kyltti.com story</h1>
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea
+voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
 </script>
 
 <script type="text/html" id="photo-view">
@@ -26,31 +31,38 @@
 
 <script type="text/html" id="photo-list">
 <h1>Epic pics from crappy places:</h1>
+<div id="testing">
+</div>
 </script>
 
 <script type="text/html" id="photo-template">
 <a id="<%= id %>" class="photos" rel="<%= destination.slug %>" title="<%= caption %>" href="{{ MEDIA_URL }}photos/medium/<%= fn %>">
     <img src="{{ MEDIA_URL }}photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
     </a>
-<div>
-    <%= caption %>
-</div>
 </script>
 
 <script type="text/html" id="gossip-list">
-<div id="story">
+<div id="story" style="margin-bottom: 25px;">
 <h1>Kyltti.comin tarina</h1>
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in
+ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
 </div>
-<h1>Kyltti.com uutisia:</h1>
+<div id="gossips"><h1>Kyltti.com uutisia:</h1></div>
 </script>
 
 <script type="text/html" id="gossip-template">
-<div class="news">
+<div class="news" style="margin-left: 20px;">
     <h4><%= title %> </h4>
-    <span style="font-size: 0.7em; color: grey;"><%= date %></span><br />
-    <%= body %>
-    <br /><br />
+    <div style="color: #999; font-size: 0.8em;">
+        <%= date %>
+    </div>
+    <div>
+        <%= body %>
+    </div>
 </div>
 </script>
 
@@ -126,7 +138,8 @@ DestinationListView = Backbone.View.extend({
 });
 
 DestinationItemView = Backbone.View.extend({
-    //tagName: "li", 
+    //tagName: "li",
+    className: "destination-div",
     template: _.template($("#destination-template").html()),
     initialize: function() {
         _.bindAll(this, "render", "remove");
@@ -165,6 +178,7 @@ PhotoListView = Backbone.View.extend({
             prevEffect  : 'none',
             nextEffect  : 'none',
             fixed: true,
+            padding: 2,
             overlayOpacity: 0.4,
             helpers : {
                 title   : {
@@ -182,11 +196,23 @@ PhotoListView = Backbone.View.extend({
                 }
             }
         });
+/*
+var $container = $(this.el);
+
+$container.imagesLoaded( function(){
+  $container.masonry({
+    itemSelector : '.photo-div'
+  });
+});
+
+*/
          return this;
     }
 });
 
 PhotoItemView = Backbone.View.extend({
+    tagName: "li",
+    className: "photo-div",
     template: _.template($("#photo-template").html()),
     //tagName: "li", 
     initialize: function() {
@@ -247,8 +273,14 @@ GossipItemView = Backbone.View.extend({
      },
 
     render: function(eventName) {
-        console.log("test:" + ParseWiki(this.model.get("body")));
         var markdown_body = ParseWiki(this.model.get("body"));
+        var created = new Date(this.model.get("date"));
+        var year = created.getFullYear();
+        var month = created.getMonth() + 1;
+        var day = created.getDate();
+        console.log(created);
+        var created_date = day + "." + month + "." + year;
+        this.model.set({ date: created_date });
         this.model.set( { body: markdown_body } );
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
@@ -261,7 +293,7 @@ Home = Backbone.Router.extend({
         "photos/:slug":     "getPhotos",
         "photos/:slug/:id": "showPhoto",
         "photos":           "photos",
-        "comments":         "comments",
+        "gossips":          "gossips",
         "destinations":     "destinations",
         "story":            "story",
     },
@@ -307,10 +339,11 @@ Home = Backbone.Router.extend({
         }});
 
    },
-    comments: function() {
+    gossips: function() {
         console.log("#comments");
         $("#header li").removeClass("active");
-        $("#header li.comments").addClass("active");
+        $("#header li.gossips").addClass("active");
+        this.index();
     },
     story: function() {
         console.log("#story");

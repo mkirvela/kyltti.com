@@ -33,7 +33,9 @@ body {
 	line-height: 1;
 }
 a {
-    color: #0088CC;
+	/*color: #423018;*/
+	color:#2f768e;
+    /*color: #0088CC;*/
 }
 
 ol, ul {
@@ -83,7 +85,9 @@ a:link {
 	color:#2f768e;
 }
 a:visited {text-decoration:none;}
-a:hover {text-decoration:underline;}
+a:hover {text-decoration:underline;
+    color: #3d4d1b;
+        text-shadow: 0 0 2px #c3f65a;}
 a:active {text-decoration:underline;}
 
 h1, h2, h3, h4 {
@@ -144,7 +148,6 @@ h1, h2, h3, h4 {
 	padding:3em 0;
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
-	float:left;
 	-webkit-column-count: 2;
 	-webkit-column-width: 50%;
 	-webkit-column-gap: 3em;
@@ -175,9 +178,9 @@ h1, h2, h3, h4 {
     background: url(images/photos.png) 50% 0% no-repeat;
 }
 
-#header ul li.comments a {
+#header ul li.gossips a {
     padding-top: 60px;
-    background: url(images/comments.png) 50% 0% no-repeat;
+    background: url(images/gossips.png) 50% 0% no-repeat;
 }
 
 #header ul li.destinations a {
@@ -190,8 +193,15 @@ h1, h2, h3, h4 {
     background: url(images/story.png) 50% 0% no-repeat;
 }
 
+li.photo-div {
+ list-style: none;
+}
+
+.photo-div {
+    float: left;
+}
+
 .photos {
-	float:left;
 	filter: grayscale(100%);
 	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'saturate\' values=\'0.3\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
 	filter: gray alpha(opacity=30);; /* IE6-9 */
@@ -203,10 +213,9 @@ h1, h2, h3, h4 {
     -webkit-filter: grayscale(0%);
 }
 
-/*piilottaa kuvien tekstit*/
-#main div div {display:none}
-
-#main .news {display:block;}
+.destination-div {
+    font-size: 1.2em;
+}
 
 /* Mikähän tää on?*/
 hr {
@@ -226,7 +235,6 @@ hr {
 
 
 p, .news {
-	display:block;
 	font-size: 1.3em;
 	line-height: 1.4;
 	padding: 1em 0;
