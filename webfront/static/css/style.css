@@ -33,9 +33,7 @@ body {
 	line-height: 1;
 }
 a {
-	/*color: #423018;*/
-	color:#2f768e;
-    /*color: #0088CC;*/
+	color:#474747;
 }
 
 ol, ul {
@@ -60,145 +58,94 @@ table {
 /*background*/
 
 body {
-	background: url(images/map.jpg) 50% 0%;
-	font: 62.5%/1.4 'Droid Serif', serif;
+	font: 62.5%/1.4 'Rambla', sans-serif;
 	height: 100%;
 }
 
-#container {
-	background: rgba(255, 255, 255, 0.4);
-	margin-left: auto;
-	margin-right: auto;
-	width: 75%;
-	padding: 2em 1em;
-	min-height: 100%;
+.pic {
+    width: 188px;
+    height: 188px;
+    overflow: hidden;
+}
+a.photos img {
+
 }
 
 /*fonts*/
 
-body {
-	font: 62.5%/1.4 'Droid Serif', serif;
-}
-
 a:link {
 	text-decoration:none;
-	color:#2f768e;
-}
-a:visited {text-decoration:none;}
-a:hover {text-decoration:underline;
-    color: #3d4d1b;
-        text-shadow: 0 0 2px #c3f65a;}
-a:active {text-decoration:underline;}
-
-h1, h2, h3, h4 {
-	font-family: 'Special Elite';
-#	letter-spacing: 0.01em;
 }
 
-/*header*/
-
-#logo {
-	float: left;
-	position:relative;
-	margin: 0 0 -3em 0;
+a:hover {
+    text-decoration:none;
+    color: #ffffff;
 }
 
-#header {
-	margin: 0 0 2em 0;
-	float: right;
-}
-
-#header ul {
-	float: left;
-	margin-top: 60px;
-}
-
-
-#header ul li {
-	font-size: 1.8em;
-	letter-spacing: 0.2em;
-	float: left;
-}
-
-#header ul li a {
-	display: block;
-	padding: 0.5em 0.8em 0 0.8em;
-	text-decoration: none;
-	color: #423018;
-	font-family: 'Special Elite';
-}
-
-#header a:hover {
-	color: #3d4d1b;
-	text-shadow: 0 0 2px #c3f65a;
-}
-
-#header ul li.logo {
-	display:none;
-}
-
-#header ul li.active a {
-    font-weight: bold;
-}
-
-/*Story*/
-
- #story {
-	font-size: 1.5em;
-	padding:3em 0;
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #000;
-	-webkit-column-count: 2;
-	-webkit-column-width: 50%;
-	-webkit-column-gap: 3em;
-	-webkit-column-rule: 1px solid #000;
-	-moz-column-count: 2;
-	-moz-column-width: 50%;
-	-moz-column-gap: 3em;
-	-moz-column-rule: 1px solid #000; 
-	column-count: 2;
-	column-width: 50%;
-	column-gap: 3em;
-	column-rule: 1px solid #000; 
-}
-
-/*content*/
-
-#content {
-	clear:both;
-}
-
-#main{
-	padding-top: 2em;
-	clear:both;
-}
-
-#header ul li.photos a {
-    padding-top: 60px;
-    background: url(images/photos.png) 50% 0% no-repeat;
-}
-
-#header ul li.gossips a {
-    padding-top: 60px;
-    background: url(images/gossips.png) 50% 0% no-repeat;
-}
-
-#header ul li.destinations a {
-    padding-top: 60px;
-    background: url(images/destinations.png) 50% 0% no-repeat;
-}
-
-#header ul li.story a {
-    padding-top: 60px;
-    background: url(images/story.png) 50% 0% no-repeat;
-}
-
-li.photo-div {
- list-style: none;
+.photo-div .details {
+overflow: hidden;
+bottom: 4px;
+color: #fff;
+background: rgba(0,0,0,0.65);
+height: 50px;
+position: absolute;
+width: 100%;
 }
 
 .photo-div {
+    position: relative;
+}
+
+.photo {
     float: left;
+    padding: 2px;
+}
+ul {
+    list-style: none;
+    font-size: 1.117em;
+}
+
+ul li.active {
+    list-style-image: url("images/arrow_right.png");
+}
+
+ul a.active {
+    color: #ffffff;
+}
+
+p {
+    display: block;
+    font-size: 1.5em;
+}
+
+.upper {
+    background: url(images/kyltti_Hero.png) 100% 60px no-repeat;
+    height: 600px;
+}
+
+.large-pic {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+.large-pic div {
+
+}
+
+.footer {
+    color: #474747;
+    text-align: center;
+    font-size: 1.5em;
+    padding-bottom: 40px;
+    border-top: 1px solid #474747;
+    padding-top: 10px;
+}
+.destinations {
+    padding-bottom: 100px;
+}
+
+.header, .content {
 }
 
 .photos {
@@ -214,59 +161,8 @@ li.photo-div {
 }
 
 .destination-div {
-    font-size: 1.2em;
+    font-size: 1.17em;
 }
 
-/* Mikähän tää on?*/
-hr {
-    display: block;
-    position: relative;
-    padding: 0;
-    margin: 8px auto;
-    width: 100%;
-    clear: both;
-    border: none;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid black;
-    font-size: 1px;
-    line-height: 0;
-    overflow: visible;
-}
-
-
-p, .news {
-	font-size: 1.3em;
-	line-height: 1.4;
-	padding: 1em 0;
-	border-bottom: 1px dotted #3d4d1b;
-	position:relative;
-}
-
-.news:hover span {display:inline;}
-.news span {
-	font-size: 0.7em;
-#	display:none;
-	float:right;
-	position:absolute;
-	bottom:0.2em;
-}
-
-h1 {
-	font-size: 2em;
-}
-
-h4 {
-	font-size: 1.3em;
-	color: #3d4d1b;
-}
-
-/*footer*/
-
-#footer {
-	clear:both;
-	text-align: center;
-	width: 300px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top:30px;
+.lower {
 }

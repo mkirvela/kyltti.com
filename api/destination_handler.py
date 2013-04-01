@@ -16,4 +16,4 @@ class DestinationHandler(BaseHandler):
         Get photos
         """
         destinations = Destination.objects
-        return destinations.all()
+        return destinations.all().order_by('name')

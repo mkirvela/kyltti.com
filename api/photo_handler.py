@@ -24,4 +24,4 @@ class PhotoHandler(BaseHandler):
         if slug:
             return photos.filter(destination__slug=slug)
         else:
-            return photos.all()
+            return photos.order_by('?')[:16]
