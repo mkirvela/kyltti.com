@@ -58,17 +58,19 @@ table {
 /*background*/
 
 body {
-	font: 62.5%/1.4 'Rambla', sans-serif;
-	height: 100%;
+    font: 62.5%/1.4 'Rambla', sans-serif;
+    height: 100%;
 }
 
 .pic {
     width: 188px;
     height: 188px;
     overflow: hidden;
+    box-shadow: 2px 2px 3px #000000;
+
 }
 a.photos img {
-
+    border: 1px solid #474747;
 }
 
 /*fonts*/
@@ -86,6 +88,7 @@ a:hover {
 overflow: hidden;
 bottom: 4px;
 color: #fff;
+padding-top: 10px;
 background: rgba(0,0,0,0.65);
 height: 50px;
 position: absolute;
@@ -98,7 +101,7 @@ width: 100%;
 
 .photo {
     float: left;
-    padding: 2px;
+    padding: 4px 8px 4px 4px;
 }
 ul {
     list-style: none;
@@ -133,6 +136,8 @@ p {
 
 }
 
+.landscape {
+}
 .footer {
     color: #474747;
     text-align: center;

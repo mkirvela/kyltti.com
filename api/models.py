@@ -22,6 +22,7 @@ class Photo(models.Model):
     fn = models.CharField(max_length=30)
     destination = models.ForeignKey('Destination')
     deleted = models.SmallIntegerField()
+    orientation = models.CharField(max_length=30)
 
     def __unicode__(self):
         return self.fn
