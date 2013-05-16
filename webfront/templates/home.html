@@ -509,7 +509,7 @@ $(function(){
     p.done(function() {
         Backbone.history.start();
     });
-        $('#nav').localScroll(800);
+        //$('#nav').localScroll(800);
 
         //.parallax(xPosition, speedFactor, outerHeight) options:
         //xPosition - Horizontal position of the element
@@ -522,6 +522,12 @@ $(function(){
         vpw = $(window).width();
         vph = $(window).height();
         $('#intro').css({'height': vph + 'px'});
+        $(window).resize(function() {
+            console.debug("resizing..");
+            vpw = $(window).width();
+            vph = $(window).height();
+            $('#intro').css({'height': vph + 'px'});
+        });
 
 /*
 function moveScroller() {
