@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     (r'^api/', include('api.urls')),
     url(r'^$', 'webfront.views.home', name='home'),
+    url(r'^test/$', 'webfront.views.test', name='test'),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # url(r'^$', 'kyltti.views.home', name='home'),
     # url(r'^kyltti/', include('kyltti.foo.urls')),

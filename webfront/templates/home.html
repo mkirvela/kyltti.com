@@ -69,12 +69,12 @@ voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
 
 <script type="text/html" id="photo-template">
 <div class="photo-div">
-<a id="<%= id %>" class="photos" href="#photos/<%= destination.slug %>/<%= fn %>" style="padding: 0; margin: 0;">
-    <img class="pic" src="{{ MEDIA_URL }}photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
-<div class="details" style="font-size: 1.5em; text-align: center; display:none;">
-<%= destination.name %>
-</div>
-</a>
+        <a id="<%= id %>" class="photos" href="#photos/<%= destination.slug %>/<%= fn %>" style="padding: 0; margin: 0;">
+                <img class="pic" src="{{ MEDIA_URL }}photos/thumbs/p<%= fn %>" alt="<%= fn %>" />
+            <div class="details" style="font-size: 1.5em; text-align: center; display:none;">
+                <%= destination.name %>
+            </div>
+    </a>
 </div>
 </script>
 
@@ -129,6 +129,12 @@ Photo = Backbone.Model.extend({
 Photos = Backbone.Collection.extend({
     model: Photo,
     url: "/api/photos/",
+    bySlug: function(slug) {
+        filtered = this.filter(function(photo) {
+            return photo.get("slug") === slug;
+        });
+        return new Photos(filtered);
+    }
 });
 
 // user model
@@ -148,7 +154,9 @@ gossips = new Gossips();
 photos = new Photos();
 destinations = new Destinations();
 
-DestinationListView = Backbone.View.extend({
+var app = app || {};
+
+app.DestinationListView = Backbone.View.extend({
     template: _.template($("#destination-list").html()),
     initialize : function(){
         _.bindAll(this,"render");
@@ -164,9 +172,9 @@ DestinationListView = Backbone.View.extend({
         this.collection.each(function(model){
             //rendering a view for each model in the collection
             if(typeof slug != 'undefined') {
-                var view = new DestinationItemView({model : model, slug: slug });
+                var view = new app.DestinationItemView({model : model, slug: slug });
             } else {
-                var view = new DestinationItemView({model : model});
+                var view = new app.DestinationItemView({model : model});
             }
             //adding it to our array
             els.push(view.render().el);
@@ -177,7 +185,7 @@ DestinationListView = Backbone.View.extend({
     }
 });
 
-DestinationItemView = Backbone.View.extend({
+app.DestinationItemView = Backbone.View.extend({
     tagName: "li",
     className: "destination",
     template: _.template($("#destination-template").html()),
@@ -196,7 +204,7 @@ DestinationItemView = Backbone.View.extend({
     },
 });
 
-PhotoListView = Backbone.View.extend({
+app.PhotoListView = Backbone.View.extend({
     template: _.template($("#photo-list").html()),
     initialize : function(){
         _.bindAll(this,"render");
@@ -211,13 +219,12 @@ PhotoListView = Backbone.View.extend({
         console.log("PhotoListView render.");
         this.collection.each(function(model){
             //rendering a view for each model in the collection
-            var view = new PhotoItemView({model : model});
+            var view = new app.PhotoItemView({model : model});
             //adding it to our array
             els.push(view.render().el);
         });
         //push that array into this View's "el"
         $(this.el).append(els);
-        console.log("doing it only once.");
         var el = document.getElementById('thumb-list');
         el.scrollIntoView(true);
 
@@ -230,11 +237,23 @@ PhotoListView = Backbone.View.extend({
                 $(this).find($('.details')).hide();
             }
         );
+        /*
+        var randomLooper = setInterval(function changePic() {
+            var list = $("#pictures div.photo").toArray();
+            var elemLength = list.length;
+            var randomNum = Math.floor(Math.random()*elemLength);
+            var randomItem = list[randomNum];
+
+            $(randomItem).find("img").fadeOut('slow', function() {
+                $(this).fadeIn('fast');
+            });
+        }, 5000);
+        */
         return this;
     }
 });
 
-PhotoLargeListView = Backbone.View.extend({
+app.PhotoLargeListView = Backbone.View.extend({
     template: _.template($("#photo-large-list").html()),
     initialize : function(){
         _.bindAll(this,"render");
@@ -271,7 +290,7 @@ PhotoLargeListView = Backbone.View.extend({
             previous_name: previous_name, next_slug: next_slug, next_name: next_name }));
         this.collection.each(function(model){
             //rendering a view for each model in the collection
-            var view = new PhotoLargeItemView({model : model});
+            var view = new app.PhotoLargeItemView({model : model});
             //adding it to our array
             els.push(view.render().el);
         });
@@ -279,12 +298,11 @@ PhotoLargeListView = Backbone.View.extend({
         $(this.el).append(els);
         var el = document.getElementById('thumb-list');
         el.scrollIntoView(true);
-
         return this;
     }
 })
 
-PhotoItemView = Backbone.View.extend({
+app.PhotoItemView = Backbone.View.extend({
     tagName: "div",
     className: "photo",
     template: _.template($("#photo-template").html()),
@@ -299,7 +317,7 @@ PhotoItemView = Backbone.View.extend({
     },
 });
 
-PhotoLargeItemView = Backbone.View.extend({
+app.PhotoLargeItemView = Backbone.View.extend({
     tagName: "div",
     className: "large-pic",
     template: _.template($("#photo-large-template").html()),
@@ -314,7 +332,7 @@ PhotoLargeItemView = Backbone.View.extend({
     },
 });
 
-StoryView = Backbone.View.extend({
+app.StoryView = Backbone.View.extend({
     initialize : function(){
         this.template = $("#story_temaplate");
     },
@@ -325,7 +343,7 @@ StoryView = Backbone.View.extend({
     }
 });
 
-GossipListView = Backbone.View.extend({
+app.GossipListView = Backbone.View.extend({
     template: _.template($("#gossip-list").html()),
     initialize : function(){
         //this.template = $("#gossip-list");
@@ -342,7 +360,7 @@ GossipListView = Backbone.View.extend({
         console.log("GossipListView render.");
         this.collection.each(function(model){
             //rendering a view for each model in the collection
-            var view = new GossipItemView({model : model});
+            var view = new app.GossipItemView({model : model});
             //adding it to our array
             els.push(view.render().el);
         });
@@ -352,7 +370,7 @@ GossipListView = Backbone.View.extend({
     }
 });
 
-GossipItemView = Backbone.View.extend({
+app.GossipItemView = Backbone.View.extend({
     template: _.template($("#gossip-template").html()),
     //tagName: "li", 
     initialize: function() {
@@ -361,22 +379,25 @@ GossipItemView = Backbone.View.extend({
      },
 
     render: function(eventName) {
-        var markdown_body = ParseWiki(this.model.get("body"));
         var created = new Date(this.model.get("date"));
         var year = created.getFullYear();
         var month = created.getMonth() + 1;
         var day = created.getDate();
-        console.log(created);
         var created_date = day + "." + month + "." + year;
         this.model.set({ date: created_date });
-        this.model.set( { body: markdown_body } );
+        this.model.set( { body: this.model.get('body') } );
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
     },
 });
 
-Home = Backbone.Router.extend({
+app.Home = Backbone.Router.extend({
     initialize: function() {
+        app.photoView = new app.PhotoListView({ collection: photos, el: '#pictures' });
+        destinations.fetch({ success: function() {
+            app.destinationView = new app.DestinationListView({ collection: destinations, el: '#destinations' });
+            app.destinationView.render();
+        }});
         /*
         $.getJSON('/api/destinations', function(data) {
             if(data) {
@@ -401,19 +422,27 @@ Home = Backbone.Router.extend({
     getPhotos: function(slug) {
         console.log("#getPhotosBySlug");
         var photos_by_slugs = new Photos();
-        console.log("destination init");
+        console.log("destination init:: " + slug);
+        console.log(photos)
+        console.log(photos.bySlug(slug))
+        /*
         destinations.fetch({ success: function() {
             destinationView = new DestinationListView({ collection: destinations, el: '#destinations', slug: slug });
             destinationView.render();
-            $.getJSON('/api/photos/' + slug + '/', function(data) {
+        */
+        $.getJSON('/api/photos/' + slug + '/', function(data) {
                 if(data) {
                     photos_by_slugs.add(data);
                     var name = photos_by_slugs.models[0].attributes.destination.name
-                    photoView = new PhotoLargeListView({ collection: photos_by_slugs, el: '#pictures', name: name });
+                    photoView = new app.PhotoLargeListView({ collection: photos_by_slugs, el: '#pictures', name: name });
                     photoView.render();
                 }
-            });   
+            });
+        /*       
         }})
+        */
+        app.destinationView.options.slug = slug;
+        app.destinationView.render();
         /*
         photos.fetch({ success: function() {
             console.log("photo_by_slug init");
@@ -422,20 +451,15 @@ Home = Backbone.Router.extend({
         }});*/
     },
     photos: function() {
-        console.log("#photos");
-        $("#header li").removeClass("active");
-        $("#header li.photos").addClass("active");
-        photos.fetch({ success: function() {
-            console.log("photo init");
-            photoView = new PhotoListView({ collection: photos, el: '#pictures' });
-            photoView.render();
-        }});
-        destinations.fetch({ success: function() {
-            console.log("destination init");
-            destinationView = new DestinationListView({ collection: destinations, el: '#destinations' });
-            destinationView.render();
-        }});
-
+        console.log("photos");
+        delete app.destinationView.options.slug;
+        app.destinationView.render();
+        var thumbs = new Photos();
+        thumbs.reset(photos.slice(0, 16));
+        console.log(thumbs);
+        console.log(app.photoView.options.collection);
+        app.photoView.collection = thumbs;
+        app.photoView.render();
     },
     index: function() {
         console.log("#index");
@@ -443,7 +467,7 @@ Home = Backbone.Router.extend({
         $("title").html("Kyltti.com uutisia");
         gossips.fetch({success: function(){
             console.log(gossips); 
-            gossipView = new GossipListView({ collection: gossips, el: '#main' });
+            gossipView = new app.GossipListView({ collection: gossips, el: '#main' });
             gossipView.render();
         }});
 
@@ -476,8 +500,28 @@ Home = Backbone.Router.extend({
 
 
 $(function(){
-    var app = new Home();
-    Backbone.history.start();
+    new app.Home();
+    var p = $.getJSON('/api/photos/', function(data) {
+        if(data) {
+            photos.reset(data);
+        }
+    });
+    p.done(function() {
+        Backbone.history.start();
+    });
+        $('#nav').localScroll(800);
+
+        //.parallax(xPosition, speedFactor, outerHeight) options:
+        //xPosition - Horizontal position of the element
+        //inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+        //outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+        $('#intro').parallax("100%", 0.2);
+        //$('#second').parallax("50%", 0.1);
+        //$('.bg').parallax("50%", 0.4);
+        //$('#third').parallax("50%", 0.3);
+        vpw = $(window).width();
+        vph = $(window).height();
+        $('#intro').css({'height': vph + 'px'});
 
 /*
 function moveScroller() {

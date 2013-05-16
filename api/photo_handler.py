@@ -1,11 +1,9 @@
 from piston.handler import BaseHandler
-from api.models import Photo 
-from django.utils import simplejson
-from django.shortcuts import get_object_or_404
+from api.models import Photo
 from piston.utils import rc
 
 class PhotoHandler(BaseHandler):
-    
+
     allowed_methods = ('GET')
     model = Photo
     # is this necessary? the id is needed in order to get dues
@@ -24,4 +22,4 @@ class PhotoHandler(BaseHandler):
         if slug:
             return photos.filter(destination__slug=slug)
         else:
-            return photos.order_by('?')[:16]
+            return photos.all()
