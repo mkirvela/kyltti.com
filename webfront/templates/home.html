@@ -528,6 +528,24 @@ $(function(){
             vph = $(window).height();
             $('#intro').css({'height': vph + 'px'});
         });
+        $("#arrow").click(function()  {
+            $('html, body').animate({
+                scrollTop: $(".lower").offset().top
+            }, 1000);
+        });
+        if ($(window).scrollTop() < 1) {
+            $("#arrow").show();
+        }
+        $(window).scroll(function() {
+            if ($(window).scrollTop() < 1) {
+            $("#arrow").show();
+        }
+        else {
+            $("#arrow").hide();
+            // <= 100px from top - hide div
+        }
+
+});
 
 /*
 function moveScroller() {

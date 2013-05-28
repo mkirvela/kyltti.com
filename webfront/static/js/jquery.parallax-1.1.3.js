@@ -23,7 +23,7 @@ http://www.gnu.org/licenses/gpl.html
         var $this = $(this);
         var getHeight;
         var firstTop;
-        var paddingTop = 30;
+        var paddingTop = 50;
 
         //get the starting position of each element to have parallax applied to it
         $this.each(function(){
