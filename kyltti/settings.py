@@ -1,3 +1,4 @@
+import os
 # Django settings for kyltti project.
 
 DEBUG = True
@@ -166,7 +167,6 @@ AWS_STORAGE_BUCKET_NAME = 'kyltti'
 STATIC_URL = '//%s.s3-website-eu-west-1.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 # at the END of settings.py:
-import os
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'dev')  # dev, production, qa, etc
 exec('from settings_%s import *' % ENVIRONMENT)
 
